@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caitlin C. Nielson — Senior UX Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #EFEAE0;
+      --ink: #1A1A1A;
+      --bondi: #007E8E;       /* primary accent — iMac G3 Bondi Blue */
+      --bondi-soft: #00A8B8;
+      --coral: #FF4A3D;        /* secondary heat — reserved for AI story */
+      --muted: #6B6257;
+      --hairline: rgba(26, 26, 26, 0.14);
+      --soon: rgba(26, 26, 26, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--bondi); }
+
+    ::selection { background: var(--coral); color: var(--bg); }
+
+    /* ——— Layout ——— */
+    .shell {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 4rem;
+    }
+
+    /* ——— Sidebar ——— */
+    aside.nav {
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+      font-family: 'Space Mono', ui-monospace, monospace;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+    .nav .root {
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav li { position: relative; }
+    .nav a {
+      display: block;
+      padding: 0.05rem 0 0.05rem 0.5rem;
+      border-left: 2px solid transparent;
+      margin-left: -0.5rem;
+      padding-left: 0.5rem;
+      transition: all 0.15s ease;
+    }
+    .nav a.active {
+      color: var(--bondi);
+      border-left-color: var(--bondi);
+      font-weight: 700;
+    }
+    .nav a:hover { color: var(--bondi); }
+    .nav .soon {
+      color: var(--soon);
+      padding-left: 0.5rem;
+    }
+    .nav .soon::after {
+      content: ' ·soon';
+      font-size: 0.68rem;
+      color: var(--soon);
+      letter-spacing: 0.08em;
+    }
+    .nav .indent { padding-left: 1rem; }
+
+    /* ——— Main column ——— */
+    main { min-width: 0; }
+
+    /* ——— Top meta ——— */
+    .topmeta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5rem;
+    }
+    .topmeta .mark { color: var(--ink); font-weight: 600; }
+    .topmeta .dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--bondi);
+      margin-right: 0.6em;
+      vertical-align: middle;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    /* ——— Hook ——— */
+    .hook {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+      font-weight: 380;
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.022em;
+      margin: 0 0 2rem;
+      color: var(--ink);
+    }
+    .hook em {
+      font-style: italic;
+      font-variation-settings: 'opsz' 144, 'SOFT' 80, 'WONK' 1;
+      font-weight: 380;
+    }
+    .hook .mark {
+      position: relative;
+      white-space: nowrap;
+    }
+    .hook .mark::after {
+      content: '';
+      position: absolute;
+      left: -0.05em;
+      right: -0.05em;
+      bottom: 0.08em;
+      height: 0.42em;
+      background: var(--coral);
+      z-index: -1;
+      transform: skewX(-6deg);
+    }
+
+    .subhook {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: 'opsz' 48;
+      font-style: italic;
+      font-weight: 340;
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      line-height: 1.45;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 0 5rem;
+      border-left: 2px solid var(--bondi);
+      padding-left: 1.25rem;
+    }
+
+    /* ——— Sections ——— */
+    section { margin-bottom: 5rem; scroll-margin-top: 2rem; }
+
+    .sec-label {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .sec-label .num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: 'opsz' 144;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--bondi);
+      font-feature-settings: 'lnum';
+    }
+    .sec-label .title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .sec-label .path {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--soon);
+      margin-left: auto;
+      letter-spacing: 0.02em;
+    }
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--hairline);
+      margin-left: 0.5rem;
+      align-self: center;
+      order: -1;
+      display: none;
+    }
+
+    /* ——— Intro block ——— */
+    .intro p {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: 'opsz' 36;
+      font-weight: 340;
+      font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+      line-height: 1.55;
+      margin: 0 0 0.9rem;
+      max-width: 620px;
+    }
+    .intro p strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .intro p .accent {
+      color: var(--bondi);
+      font-style: italic;
+    }
+
+    /* ——— Work ——— */
+    .work-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--hairline);
+      align-items: start;
+    }
+    .work-item:last-of-type { border-bottom: 1px solid var(--hairline); }
+    .work-item .meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.45rem;
+      font-weight: 400;
+    }
+    .work-item .meta .co {
+      display: block;
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.04em;
+    }
+    .work-item h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: 'opsz' 48, 'SOFT' 30;
+      font-weight: 400;
+      font-size: 1.55rem;
+      line-height: 1.2;
+      letter-spacing: -0.012em;
+      margin: 0 0 0.75rem;
+    }
+    .work-item .tag {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      margin-left: 0.5rem;
+      vertical-align: 0.28em;
+      font-weight: 600;
+    }
+    .work-item .tag.ai {
+      color: var(--coral);
+      border: 1px solid var(--coral);
+    }
+    .work-item .tag.ops {
+      color: var(--bondi);
+      border: 1px solid var(--bondi);
+    }
+    .work-item .outcome {
+      color: var(--ink);
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .work-item .outcome::before {
+      content: '→ ';
+      color: var(--bondi);
+      font-weight: 700;
+    }
+
+    /* ——— AI funnel visual ——— */
+    .funnel {
+      margin: 1.25rem 0 0.25rem;
+      padding: 1.2rem 1.25rem;
+      background: rgba(0, 126, 142, 0.05);
+      border-left: 2px solid var(--bondi);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.85;
+    }
+    .funnel .ftitle {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .funnel .stage {
+      display: block;
+      color: var(--ink);
+      position: relative;
+    }
+    .funnel .stage .n {
+      color: var(--bondi);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    .funnel .stage.final .n { color: var(--coral); }
+    .funnel .stage.s2 { padding-left: 1.2rem; }
+    .funnel .stage.s3 { padding-left: 2.4rem; }
+    .funnel .stage.s4 { padding-left: 3.6rem; }
+    .funnel .stage.s5 { padding-left: 4.8rem; }
+
+    /* ——— Capabilities ——— */
+    .caps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .caps h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin: 0 0 1rem;
+    }
+    .caps ul { list-style: none; padding: 0; margin: 0; }
+    .caps li {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: 'opsz' 24;
+      font-weight: 380;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      padding: 0.35rem 0;
+    }
+
+    /* ——— Tools ——— */
+    .tools p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.95;
+      margin: 0;
+      max-width: 640px;
+    }
+    .tools .sep { color: var(--bondi); margin: 0 0.45em; }
+
+    /* ——— Acknowledgements ——— */
+    .ack {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 640px;
+      padding: 1rem 1.2rem;
+      border: 1px dashed var(--hairline);
+    }
+    .ack strong { color: var(--ink); font-weight: 700; }
+
+    /* ——— Footer ——— */
+    footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    footer .right a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--bondi);
+      padding-bottom: 2px;
+      font-weight: 500;
+    }
+    footer .right a:hover { color: var(--bondi); }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.4rem 3rem; }
+      aside.nav {
+        position: static;
+        border-bottom: 1px solid var(--hairline);
+        padding-bottom: 1.5rem;
+        column-count: 2;
+        column-gap: 1.5rem;
+      }
+      .nav .root { column-span: all; }
+      .topmeta { margin-bottom: 3rem; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+      section { margin-bottom: 3.5rem; }
+      .work-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .work-item .meta { padding-top: 0; }
+      .caps { grid-template-columns: 1fr; gap: 2rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .funnel .stage.s2 { padding-left: 0.8rem; }
+      .funnel .stage.s3 { padding-left: 1.6rem; }
+      .funnel .stage.s4 { padding-left: 2.4rem; }
+      .funnel .stage.s5 { padding-left: 3.2rem; }
+    }
+    @media (max-width: 520px) {
+      aside.nav { column-count: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <aside class="nav" aria-label="Portfolio navigation">
+      <div class="root">caitlin-nielson/</div>
+      <ul>
+        <li><a href="#readme" data-section="readme">README.md</a></li>
+        <li><a href="#ccn" data-section="ccn">ccn.md</a></li>
+        <li><a href="#work" data-section="work">work/</a></li>
+        <li class="indent"><span class="soon">timeline.md</span></li>
+        <li class="indent"><span class="soon">ways-of-working.md</span></li>
+        <li><span class="soon">case-studies/</span></li>
+        <li><a href="#skills" data-section="skills">skills/</a></li>
+        <li class="indent"><span class="soon">methods-matrix.md</span></li>
+        <li class="indent"><a href="#tools" data-section="tools">tools.md</a></li>
+        <li class="indent"><span class="soon">learning-now.md</span></li>
+        <li><span class="soon">education/</span></li>
+        <li><span class="soon">resources/</span></li>
+        <li><span class="soon">resume.pdf</span></li>
+        <li><a href="#acknowledgements" data-section="acknowledgements">ACKNOWLEDGEMENTS.md</a></li>
+        <li><a href="#contact" data-section="contact">contact.md</a></li>
+      </ul>
+    </aside>
+
+    <main>
+
+      <div class="topmeta">
+        <span class="mark">Caitlin C. Nielson · Senior UX Researcher</span>
+        <span><span class="dot"></span>Available April 2026</span>
+      </div>
+
+      <section id="readme">
+        <h1 class="hook">
+          I study how people think about <em>money</em>, navigate <em>AI</em>, and file their <em>taxes</em>.
+          Then I <span class="mark">build the tools</span> to keep studying it, faster.
+        </h1>
+        <p class="subhook">
+          Senior UX researcher who designs research programs, builds the infrastructure to scale them, and uses AI to make insights impossible to ignore.
+        </p>
+      </section>
+
+      <section id="ccn" class="intro">
+        <div class="sec-label">
+          <span class="num">01</span>
+          <span class="title">Who</span>
+          <span class="path">~/ccn.md</span>
+        </div>
+        <p>A decade across <span class="accent">Apple, Google, and Intuit</span> — currently senior researcher in Intuit's Consumer Group (TurboTax, Credit Karma, Connectors).</p>
+        <p>Specialized in <strong>fintech, personal finance, and AI product behavior</strong> — usability, trust, and the decisions people make under pressure.</p>
+        <p>Cultural anthropology background; documentary work in Ecuador reached <strong>30,000+ viewers</strong> and earned a Routledge citation. I run a team-of-one practice the same way — field-first, infrastructure-aware, built to scale without me in the loop.</p>
+      </section>
+
+      <section id="work" class="work">
+        <div class="sec-label">
+          <span class="num">02</span>
+          <span class="title">Selected work</span>
+          <span class="path">~/work/</span>
+        </div>
+
+        <article class="work-item">
+          <div class="meta">
+            <span class="co">Intuit</span>
+            2024 —
+          </div>
+          <div>
+            <h3>
+              AI attitudes research program
+              <span class="tag ai">AI</span>
+              <span class="tag ops">ResearchOps</span>
+            </h3>
+            <p class="outcome">Designed a multi-stage AI attitudes research program — from broad mental models to live product testing — while architecting an integrated ResearchOps stack of <strong>15 AI-connected tools</strong> that lets non-researchers run high-quality studies independently.</p>
+            <div class="funnel" aria-label="Five-stage zoom-lens research funnel">
+              <span class="ftitle">Zoom-lens funnel · broad → specific</span>
+              <span class="stage s1"><span class="n">01</span>How people use AI — mental models, trust, behaviors</span>
+              <span class="stage s2"><span class="n">02</span>AI + finance — domain attitudes, perceived stakes</span>
+              <span class="stage s3"><span class="n">03</span>AI + taxes — compliance anxiety, delegation vs. control</span>
+              <span class="stage s4"><span class="n">04</span>AI tools for taxes — behavioral, task-level</span>
+              <span class="stage s5 final"><span class="n">05</span>Testing specific tools in product — evaluative, usability</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="meta">
+            <span class="co">Google</span>
+            2019 — 2022
+          </div>
+          <div>
+            <h3>Google Pay platform migration</h3>
+            <p class="outcome">Led end-to-end research for a <strong>25M-user financial product</strong> through a major platform migration, and built a stakeholder communication system that turned research findings into a weekly must-read across the org.</p>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="meta">
+            <span class="co">Apple</span>
+            2016 — 2019
+          </div>
+          <div>
+            <h3>Solo researcher, enterprise portfolio</h3>
+            <p class="outcome">Operated as solo researcher owning a <strong>150,000-person enterprise product portfolio</strong> — built scalable research processes from scratch, including work that <strong>cut employee support burden in half</strong>.</p>
+          </div>
+        </article>
+      </section>
+
+      <section id="skills" class="caps-section">
+        <div class="sec-label">
+          <span class="num">03</span>
+          <span class="title">Skills</span>
+          <span class="path">~/skills/</span>
+        </div>
+        <div class="caps">
+          <div>
+            <h4>Methods</h4>
+            <ul>
+              <li>Mixed-methods programs</li>
+              <li>Moderated interviews</li>
+              <li>Diary &amp; longitudinal studies</li>
+              <li>Concept &amp; usability testing</li>
+              <li>Survey design</li>
+              <li>UX audits</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Domain &amp; infrastructure</h4>
+            <ul>
+              <li>Tax filing &amp; compliance UX</li>
+              <li>Credit &amp; personal finance</li>
+              <li>Payments &amp; transactional flows</li>
+              <li>AI usability &amp; trust</li>
+              <li>ResearchOps architecture</li>
+              <li>API / MCP tool integration</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="tools">
+        <div class="sec-label">
+          <span class="num">04</span>
+          <span class="title">Tools</span>
+          <span class="path">~/skills/tools.md</span>
+        </div>
+        <p>
+          Claude &amp; GPT APIs<span class="sep">·</span>
+          Custom research chatbot (Intuit)<span class="sep">·</span>
+          Maze<span class="sep">·</span>
+          UserTesting<span class="sep">·</span>
+          dscout<span class="sep">·</span>
+          User Interviews<span class="sep">·</span>
+          Qualtrics<span class="sep">·</span>
+          Figma<span class="sep">·</span>
+          FigJam<span class="sep">·</span>
+          Notion<span class="sep">·</span>
+          MCP-connected workflows
+        </p>
+      </section>
+
+      <section id="acknowledgements">
+        <div class="sec-label">
+          <span class="num">05</span>
+          <span class="title">Acknowledgements</span>
+          <span class="path">~/ACKNOWLEDGEMENTS.md</span>
+        </div>
+        <div class="ack">
+          <strong>Built with</strong> Claude Code, hand-written HTML + CSS, no framework.
+          <strong>Fonts:</strong> Fraunces &amp; Space Grotesk &amp; Space Mono (Google Fonts).
+          <strong>Accessibility:</strong> targets WCAG 2.1 AA.
+          <strong>Heuristics:</strong> Nielsen Norman 10 applied throughout.
+          <strong>AI disclosure:</strong> copy drafted with AI assistance; impact claims, numbers, and narrative are Caitlin's own.
+        </div>
+      </section>
+
+      <footer id="contact">
+        <div class="left">
+          Open to contract, embedded, or full-time
+        </div>
+        <div class="right">
+          <a href="mailto:[email@domain.com]">[email@domain.com]</a>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // Active section highlighting in sidebar
+    const navLinks = document.querySelectorAll('.nav a[data-section]');
+    const sections = Array.from(navLinks)
+      .map(a => document.getElementById(a.getAttribute('data-section')))
+      .filter(Boolean);
+
+    const setActive = (id) => {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('data-section') === id);
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActive(visible[0].target.id);
+    }, { rootMargin: '-20% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
