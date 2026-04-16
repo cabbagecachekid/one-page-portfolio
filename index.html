@@ -172,6 +172,34 @@
       border-left: 2px solid var(--bondi);
       padding-left: 1.25rem;
     }
+    .subhook em {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ——— Magnifier cursor ——— */
+    .magnifier {
+      position: fixed;
+      top: 0; left: 0;
+      width: 36px; height: 36px;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(var(--tx, -100px), var(--ty, -100px)) scale(var(--s, 1)) rotate(var(--r, 0deg));
+      will-change: transform;
+      transition: filter 0.25s ease;
+      filter: drop-shadow(0 2px 6px rgba(0, 126, 142, 0.15));
+    }
+    .magnifier.active { --s: 1.25; }
+    .magnifier.examining { --r: 12deg; --s: 1.35; }
+    body.custom-cursor, body.custom-cursor * { cursor: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .magnifier { display: none; }
+      body.custom-cursor, body.custom-cursor * { cursor: auto !important; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .magnifier { display: none; }
+    }
 
     /* ——— Sections ——— */
     section { margin-bottom: 5rem; scroll-margin-top: 2rem; }
@@ -466,11 +494,10 @@
 
       <section id="readme">
         <h1 class="hook">
-          I study how people think about <em>money</em>, navigate <em>AI</em>, and file their <em>taxes</em>.
-          Then I <span class="mark">build the tools</span> to keep studying it, faster.
+          Senior UX researcher who designs research programs, builds the infrastructure to scale them, and uses AI to make insights <span class="mark">impossible to ignore</span>.
         </h1>
         <p class="subhook">
-          Senior UX researcher who designs research programs, builds the infrastructure to scale them, and uses AI to make insights impossible to ignore.
+          I study how people think about <em>money</em>, navigate <em>AI</em>, and file their <em>taxes</em>. Then I build the tools to keep studying it, faster.
         </p>
       </section>
 
@@ -618,6 +645,13 @@
     </main>
   </div>
 
+  <div class="magnifier" aria-hidden="true">
+    <svg viewBox="0 0 36 36" width="36" height="36">
+      <circle cx="14" cy="14" r="9" fill="none" stroke="#007E8E" stroke-width="2.5"/>
+      <line x1="20.5" y1="20.5" x2="30" y2="30" stroke="#007E8E" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+
   <script>
     // Active section highlighting in sidebar
     const navLinks = document.querySelectorAll('.nav a[data-section]');
@@ -639,6 +673,44 @@
     }, { rootMargin: '-20% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
 
     sections.forEach(s => observer.observe(s));
+
+    // Magnifier cursor (progressive enhancement)
+    (function() {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (prefersReduced || !isFinePointer) return;
+
+      const mag = document.querySelector('.magnifier');
+      if (!mag) return;
+
+      document.body.classList.add('custom-cursor');
+
+      let mx = -100, my = -100, tx = -100, ty = -100;
+      document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+      document.addEventListener('mouseleave', () => { mx = -100; my = -100; });
+
+      function tick() {
+        tx += (mx - tx) * 0.22;
+        ty += (my - ty) * 0.22;
+        mag.style.setProperty('--tx', `${tx - 18}px`);
+        mag.style.setProperty('--ty', `${ty - 18}px`);
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      // Scale on interactive elements
+      document.querySelectorAll('a, button, .hook .mark, .nav a').forEach(el => {
+        el.addEventListener('mouseenter', () => mag.classList.add('active'));
+        el.addEventListener('mouseleave', () => mag.classList.remove('active'));
+      });
+
+      // "Examining" tilt over the funnel
+      const funnel = document.querySelector('.funnel');
+      if (funnel) {
+        funnel.addEventListener('mouseenter', () => mag.classList.add('examining'));
+        funnel.addEventListener('mouseleave', () => mag.classList.remove('examining'));
+      }
+    })();
   </script>
 </body>
 </html>
