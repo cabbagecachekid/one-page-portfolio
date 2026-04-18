@@ -177,6 +177,43 @@
       font-weight: 500;
       color: var(--ink);
     }
+    .hook-accent {
+      display: block;
+      color: var(--bondi);
+    }
+
+    /* ——— AI section ——— */
+    .ai-intro {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: 'opsz' 48, 'SOFT' 30;
+      font-weight: 400;
+      font-size: 1.35rem;
+      line-height: 1.35;
+      margin: 0 0 2rem;
+      max-width: 640px;
+      color: var(--ink);
+    }
+    .ai-block p {
+      font-size: 1rem;
+      line-height: 1.65;
+      margin: 0 0 1.25rem;
+      max-width: 640px;
+    }
+    .ai-block strong { font-weight: 600; }
+    .ai-block em {
+      font-style: italic;
+      color: var(--bondi);
+    }
+    .ai-block .footnote {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--hairline);
+    }
+    .ai-block .footnote em {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
 
     /* ——— Magnifier cursor ——— */
     .magnifier {
@@ -474,6 +511,7 @@
         <li class="indent"><span class="soon">ways-of-working.md</span></li>
         <li><span class="soon">case-studies/</span></li>
         <li><a href="#skills" data-section="skills">skills/</a></li>
+        <li class="indent"><a href="#ai" data-section="ai">ai/</a></li>
         <li class="indent"><span class="soon">methods-matrix.md</span></li>
         <li class="indent"><a href="#tools" data-section="tools">tools.md</a></li>
         <li class="indent"><span class="soon">learning-now.md</span></li>
@@ -494,10 +532,11 @@
 
       <section id="readme">
         <h1 class="hook">
-          Senior UX researcher who designs research programs, builds the infrastructure to scale them, and uses AI to make insights <span class="mark">impossible to ignore</span>.
+          Research on the decisions people make about money and AI —
+          <span class="hook-accent">especially the ones they make under pressure.</span>
         </h1>
         <p class="subhook">
-          I study how people think about <em>money</em>, navigate <em>AI</em>, and file their <em>taxes</em>. Then I build the tools to keep studying it, faster.
+          A decade across Apple, Google, and Intuit — researching money, AI, and the trust between them.
         </p>
       </section>
 
@@ -525,11 +564,7 @@
             2024 —
           </div>
           <div>
-            <h3>
-              AI attitudes research program
-              <span class="tag ai">AI</span>
-              <span class="tag ops">ResearchOps</span>
-            </h3>
+            <h3>AI attitudes research program</h3>
             <p class="outcome">Designed a multi-stage AI attitudes research program — from broad mental models to live product testing — while architecting an integrated ResearchOps stack of <strong>15 AI-connected tools</strong> that lets non-researchers run high-quality studies independently.</p>
             <div class="funnel" aria-label="Five-stage zoom-lens research funnel">
               <span class="ftitle">Zoom-lens funnel · broad → specific</span>
@@ -565,9 +600,23 @@
         </article>
       </section>
 
-      <section id="skills" class="caps-section">
+      <section id="ai">
         <div class="sec-label">
           <span class="num">03</span>
+          <span class="title">AI</span>
+          <span class="path">~/skills/ai/</span>
+        </div>
+        <h3 class="ai-intro">I research AI products, and I've built my research practice around AI. Each side makes the other sharper.</h3>
+        <div class="ai-block">
+          <p><strong>Research <em>on</em> AI.</strong> Currently designing Intuit's multi-stage AI attitudes program (see above). My first dedicated AI study was at Google in 2021 — hallucinations in personal finance models. Five years on the same question.</p>
+          <p><strong>Research <em>with</em> AI.</strong> Claude is my research homebase at Intuit: the hub my enterprise tool APIs, MCPs, custom connectors, custom skills, and project-level instructions run through. I've built multi-tool workflows that turn 5-hour synthesis passes into 20 minutes — time that goes straight back into data verifiability, sharper recruitment, and working with cross-functional partners to actually implement findings.</p>
+          <p class="footnote">Also: <strong>Patch Pay</strong> — a fully functional AI app I built at the Kiro Hackathon (judging round qualifier). <em>Stanford Online "UI/UX Design for AI Products" (2025) · Google Cloud "Prompt Design in Vertex AI" badge (2024).</em></p>
+        </div>
+      </section>
+
+      <section id="skills" class="caps-section">
+        <div class="sec-label">
+          <span class="num">04</span>
           <span class="title">Skills</span>
           <span class="path">~/skills/</span>
         </div>
@@ -599,7 +648,7 @@
 
       <section id="tools" class="tools">
         <div class="sec-label">
-          <span class="num">04</span>
+          <span class="num">05</span>
           <span class="title">Tools</span>
           <span class="path">~/skills/tools.md</span>
         </div>
@@ -620,7 +669,7 @@
 
       <section id="acknowledgements">
         <div class="sec-label">
-          <span class="num">05</span>
+          <span class="num">06</span>
           <span class="title">Acknowledgements</span>
           <span class="path">~/ACKNOWLEDGEMENTS.md</span>
         </div>
